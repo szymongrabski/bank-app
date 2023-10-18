@@ -1,8 +1,9 @@
-class Konto:
+from .Account import Account
+
+class PersonalAccount(Account):
     def __init__(self, imie, nazwisko, pesel, discount_code = None):
         self.imie = imie
         self.nazwisko = nazwisko
-        self.saldo = 0
         if len(pesel) != 11:
             self.pesel = "Wrong pesel"
         else :
@@ -31,3 +32,6 @@ class Konto:
             return True
         else:
             return False
+        
+
+
