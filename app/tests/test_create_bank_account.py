@@ -5,7 +5,7 @@ from ..Konto import Konto
 class TestCreateBankAccount(unittest.TestCase):
     imie = "Dariusz"
     nazwisko = "Januszewski"
-    pesel = "12345678901"
+    pesel = "03245678901"
     discount_code = "PROMO_123"
     def test_tworzenie_konta(self):
         pierwsze_konto = Konto(self.imie, self.nazwisko, self.pesel)
@@ -29,6 +29,7 @@ class TestCreateBankAccount(unittest.TestCase):
         self.assertEqual(account.pesel, "Wrong pesel", "Pusty pesel został przyjęty za prawidłowy")
     
     # Feature 4 - discount code
+
     def test_discount_with_wrong_prefix(self):
         account = Konto(self.imie, self.nazwisko, self.pesel, "PRIMO_123")
         self.assertEqual(account.saldo, 0, "Wrong prefix in discount code passed")
@@ -48,14 +49,23 @@ class TestCreateBankAccount(unittest.TestCase):
     # Feature 5 - born after 1960
 
     def test_discount_year_59(self):
-        account = Konto(self.imie, self.nazwisko, self.pesel, self.discount_code)
+        account = Konto(self.imie, self.nazwisko, "59010100000", self.discount_code)
+        self.assertEqual(account.saldo, 0, "Born in 1959 passed")
+
     def test_discount_year_61(self):
-        account = Konto(self.imie, self.nazwisko, self.pesel, self.discount_code)
+        account = Konto(self.imie, self.nazwisko, "61010100000", self.discount_code)
+        self.assertEqual(account.saldo, 0, "Born in 1961 passed")
+
     def test_discount_year_60(self):
-        account = Konto(self.imie, self.nazwisko, self.pesel, self.discount_code)
+        account = Konto(self.imie, self.nazwisko, "60010100000", self.discount_code)
+        self.assertEqual(account.saldo, 0, "Born in 1960 passed")
+    
     def test_discount_year_2001(self):
-        account = Konto(self.imie, self.nazwisko, self.pesel, self.discount_code)
+        account = Konto(self.imie, self.nazwisko, "01260100000", self.discount_code)
+        self.assertEqual(account.saldo, 0, "Born in 2001 passed")
+    
     def test_discount_year_2001_wrong_discount_code(self):
-        account = Konto(self.imie, self.nazwisko, self.pesel, self.discount_code)
+        account = Konto(self.imie, self.nazwisko, "01260100000", "PROMOU_12")
+        self.assertEqual(account.saldo, 0, "Born in 2001 and with wrong discount code passed")
 
     

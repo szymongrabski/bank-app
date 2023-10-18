@@ -8,7 +8,7 @@ class Konto:
         else :
             self.pesel = pesel
         
-        if self.is_discount_code_correct(discount_code):
+        if self.is_discount_code_correct(discount_code) and self.is_born_after_1960(pesel):
             self.saldo = 50
         else:
             self.saldo = 0
@@ -21,3 +21,13 @@ class Konto:
         else:
             return False
 
+    def is_born_after_1960(self, pesel):
+        year = int(pesel[0:2])
+        month = int(pesel[2:4])
+
+        if year > 60:
+            return True
+        elif month > 20:
+            return True
+        else:
+            return False
