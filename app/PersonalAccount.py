@@ -1,19 +1,21 @@
 from .Account import Account
 
+
 class PersonalAccount(Account):
-    def __init__(self, imie, nazwisko, pesel, discount_code = None):
+    def __init__(self, imie, nazwisko, pesel, discount_code=None):
+        super().__init__()
         self.imie = imie
         self.nazwisko = nazwisko
         if len(pesel) != 11:
             self.pesel = "Wrong pesel"
-        else :
+        else:
             self.pesel = pesel
-        
+
         if self.is_discount_code_correct(discount_code) and self.is_born_after_1960(pesel):
             self.saldo = 50
         else:
             self.saldo = 0
-    
+
     def is_discount_code_correct(self, discount_code):
         if discount_code is None:
             return False
@@ -32,6 +34,4 @@ class PersonalAccount(Account):
             return True
         else:
             return False
-        
-
 

@@ -1,11 +1,16 @@
 class Account:
     def __init__(self):
-        self.saldo = 0    
+        self.saldo = 0
+        self.express_transfer_fee = 1
 
     def incoming_transfer(self, amount):
         if amount > 0:
             self.saldo += amount
-    
+
     def outgoing_transfer(self, amount):
-        if amount > 0 and amount <= self.saldo:
+        if 0 < amount <= self.saldo:
             self.saldo -= amount
+
+    def express_transfer(self, amount):
+        if 0 < amount <= self.saldo:
+            self.saldo -= (amount + self.express_transfer_fee)
