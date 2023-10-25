@@ -17,7 +17,7 @@ class Account:
     def express_transfer(self, amount):
         if 0 < amount <= self.saldo:
             self.saldo -= (amount + self.express_transfer_fee)
-            self.transfer_history.append((-amount, -self.express_transfer_fee))
+            self.transfer_history.extend([-amount, -self.express_transfer_fee])
     
 
     
