@@ -17,6 +17,6 @@ class AccountRegister:
     def find_account_in_register_by_pesel(cls, pesel):
         for account in cls.account_list:
             if account.pesel == pesel:
-                return True
-        return False
+                return account
+        return None
 
