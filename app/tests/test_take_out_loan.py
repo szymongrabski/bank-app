@@ -22,3 +22,6 @@ class TestTakeOutLoan(unittest.TestCase):
         loan_ability = self.account.take_out_loan(expected_loan_amount)
         self.assertEqual(loan_ability, expected_loan_ability, f"{msg} - Loan ability mismatch")
         self.assertEqual(self.account.saldo, expected_saldo, f"{msg} - Saldo mismatch")
+
+
+
