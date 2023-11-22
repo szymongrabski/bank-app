@@ -10,3 +10,12 @@ class FirmAccount(Account):
             self.nip = "Wrong NIP"
         else:
             self.nip = nip
+
+    def take_out_loan(self, amount):
+        if amount < 0:
+            return False
+        elif -1775 in self.transfer_history and self.saldo >= amount*2:
+            self.saldo += amount
+            return True
+        else:
+            return False
