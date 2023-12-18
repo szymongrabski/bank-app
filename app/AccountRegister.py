@@ -20,3 +20,10 @@ class AccountRegister:
                 return account
         return None
 
+    @classmethod
+    def delete_account(cls, pesel):
+        for account in cls.account_list:
+            if account.pesel == pesel:
+                cls.account_list.remove(account)
+
+

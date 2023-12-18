@@ -1,7 +1,7 @@
 import unittest
 from ..PersonalAccount import PersonalAccount
 from ..FirmAccount import FirmAccount
-
+from unittest.mock import patch
 
 class TestExpressTransfers(unittest.TestCase):
     def test_express_transfer_from_personal_account(self):
@@ -20,14 +20,17 @@ class TestExpressTransfers(unittest.TestCase):
         account = PersonalAccount("Janusz", "Testowy", "03260100000", "PROM_123")
         account.express_transfer(50)
         self.assertEqual(account.saldo, -1, "Wrong saldo in express transfer made by PersonalAccount with discount code")
-
-    def test_express_transfer_from_firm_account(self):
+    @patch('app.FirmAccount.FirmAccount.check_nip')
+    def test_express_transfer_from_firm_account(self, mock_check_nip):
+        mock_check_nip.return_value = True
         account = FirmAccount("SGF", "1234567890")
         account.saldo = 100
         account.express_transfer(50)
         self.assertEqual(account.saldo, 45, "Wrong saldo in express transfer made by FirmAccount")
 
-    def test_express_transfer_from_firm_account_with_amount_bigger_than_saldo(self):
+    @patch('app.FirmAccount.FirmAccount.check_nip')
+    def test_express_transfer_from_firm_account_with_amount_bigger_than_saldo(self, mock_check_nip):
+        mock_check_nip.return_value = True
         account = FirmAccount("SGF", "1234567890")
         account.saldo = 10
         account.express_transfer(50)

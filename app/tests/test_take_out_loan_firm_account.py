@@ -1,13 +1,15 @@
 import unittest
 from ..FirmAccount import FirmAccount
 from parameterized import parameterized
-
+from unittest.mock import patch
 
 class TestTakeOutLoanByFirmAccount(unittest.TestCase):
     firm_name = "TestFirm"
     nip = "1234567890"
 
-    def setUp(self):
+    @patch('app.FirmAccount.FirmAccount.check_nip')
+    def setUp(self, mock_check_nip):
+        mock_check_nip.return_value = True
         self.account = FirmAccount(self.firm_name, self.nip)
     @parameterized.expand([
         ([-1775], 500, 100, True, 600, "Loan taken by firm account with two right conditions is not working"),
