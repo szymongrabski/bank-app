@@ -14,8 +14,6 @@ class TestCreateBankAccount(unittest.TestCase):
         self.assertEqual(pierwsze_konto.saldo, 0, "Saldo nie jest zerowe!")
         self.assertEqual(pierwsze_konto.pesel, self.pesel)
 
-    #tutaj proszę dodawać nowe testy
-
     def test_pesel_with_len_10(self):
         account = PersonalAccount(self.name, self.surname, "1234567890")
         self.assertEqual(account.pesel, "Wrong pesel", "Za krótki pesel został przyjęty za prawidłowy")
@@ -27,7 +25,7 @@ class TestCreateBankAccount(unittest.TestCase):
     def test_empty_pesel(self):
         account = PersonalAccount(self.name, self.surname, "")
         self.assertEqual(account.pesel, "Wrong pesel", "Pusty pesel został przyjęty za prawidłowy")
-    
+
     # Feature 4 - discount code
 
     def test_discount_code(self):
@@ -63,13 +61,12 @@ class TestCreateBankAccount(unittest.TestCase):
     def test_discount_year_60(self):
         account = PersonalAccount(self.name, self.surname, "60010100000", self.discount_code)
         self.assertEqual(account.saldo, 0, "Born in 1960 passed")
-    
+
     def test_discount_year_2001(self):
         account = PersonalAccount(self.name, self.surname, "01260100000", self.discount_code)
         self.assertEqual(account.saldo, 50, "Born in 2001 is not working")
-    
+
     def test_discount_year_2001_wrong_discount_code(self):
         account = PersonalAccount(self.name, self.surname, "01260100000", "PROMOU_12")
         self.assertEqual(account.saldo, 0, "Born in 2001 and with wrong discount code passed")
 
-    

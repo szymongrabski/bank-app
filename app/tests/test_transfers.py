@@ -50,4 +50,3 @@ class TestTransfer(unittest.TestCase):
         account.incoming_transfer(20)
         account.outgoing_transfer(30)
         self.assertEqual(account.saldo, 40, "Multiple transfers are not working")
-
