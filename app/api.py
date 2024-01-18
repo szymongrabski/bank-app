@@ -25,7 +25,6 @@ def how_many_accounts():
     accountsNumber = AccountRegister.count_how_much_accounts_in_register()
     return jsonify({"active_accounts": accountsNumber}), 200
 
-
 @app.route("/api/accounts/<pesel>", methods=['GET'])
 def find_account_by_pesel(pesel):
     foundAccount = AccountRegister.find_account_in_register_by_pesel(pesel)
@@ -85,4 +84,17 @@ def make_transfer(pesel):
     elif data["type"] == "outgoing":
         foundAccount.outgoing_transfer(data["amount"])
         return jsonify({"message": "Outgoing transfer accepted to realisation"}), 200
+
+
+@app.route("/api/accounts/save", methods=["PATCH"])
+def save_to_database():
+    AccountRegister.save()
+    return jsonify({"message": "Saved to database"}), 200
+
+
+@app.route("/api/accounts/load", methods=["PATCH"])
+def load_from_database():
+    AccountRegister.load()
+    accounts_number = AccountRegister.count_how_much_accounts_in_register()
+    return jsonify({"message": f"Loaded from database", "accounts_number": accounts_number}), 200
 

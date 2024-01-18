@@ -7,7 +7,7 @@ class PersonalAccount(Account):
         super().__init__()
         self.name = name
         self.surname = surname
-
+        self.saldo = 0
         if len(pesel) != 11:
             self.pesel = "Wrong pesel"
         else:
