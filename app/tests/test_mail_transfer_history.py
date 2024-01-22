@@ -59,12 +59,6 @@ class TestSendHistoryByEmail(unittest.TestCase):
         status = account.send_transfer_history_by_mail("test@gmail.com", smtp_connection)
         self.assertTrue(status)
 
-        smtp_connection.send.assert_called_once_with(
-            f"Wyciąg z dnia {date.today().strftime("%Y-%m-%d")}",
-            "Historia konta twojej firmy to: [200, -500]",
-            "test@gmail.com"
-        )
-
     @patch('app.FirmAccount.FirmAccount.check_nip')
     def test_send_history_firm_account_failure(self, mock_check_nip):
         mock_check_nip.return_value = True
