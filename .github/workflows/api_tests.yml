@@ -1,0 +1,34 @@
+# .github/workflows/api_tests.yml
+
+name: API Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  api_tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Start Flask App
+        run: |
+          flask --app app/api.py run &
+      - name: Connect with Mongo by docker
+        run: |
+          docker compose -f app/mongo.yml up -d
+      - name: Run API Tests
+        run: pytest api_tests_folder/
