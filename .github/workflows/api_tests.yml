@@ -29,6 +29,6 @@ jobs:
           flask --app app/api.py run &
       - name: Connect with Mongo by docker
         run: |
-          docker compose -f app/mongo.yml up -d
+          docker compose -f mongo.yml up -d
       - name: Run API Tests
-        run: pytest api_tests_folder/
+        run: pytest api_tests/
