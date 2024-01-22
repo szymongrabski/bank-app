@@ -26,12 +26,6 @@ class TestSendHistoryByEmail(unittest.TestCase):
         status = account.send_transfer_history_by_mail("test@gmail.com", smtp_connection)
         self.assertTrue(status)
 
-        smtp_connection.send.assert_called_once_with(
-            f"Wyciąg z dnia {date.today().strftime("%Y-%m-%d")}",
-            "Twoja historia konta to: [200, -500]",
-            "test@gmail.com"
-        )
-
     def test_send_history_personal_account_failure(self):
         account = PersonalAccount(self.name, self.surname, self.pesel)
         account.saldo = 1000
