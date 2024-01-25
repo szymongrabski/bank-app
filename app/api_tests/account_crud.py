@@ -1,6 +1,5 @@
 import requests
 import unittest
-from ..AccountRegister import AccountRegister
 
 
 class TestAccountCrud(unittest.TestCase):
